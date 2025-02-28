@@ -52,6 +52,7 @@ body {
     position: relative;
     font-size: 60cqmin;
     text-align: center;
+    align-content: center;
     line-height: unset;
     cursor: grab;
     width: 100%;
