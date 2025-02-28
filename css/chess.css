@@ -54,9 +54,13 @@ body {
     text-align: center;
     align-content: center;
     line-height: unset;
-    cursor: grab;
+    cursor: pointer;
     width: 100%;
     height:100%;
+}
+
+.chess-piece:active {
+    transform: scale(0.80);
 }
 
 .cp-white {
