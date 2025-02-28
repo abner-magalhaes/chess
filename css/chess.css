@@ -28,11 +28,29 @@ body {
 }
 
 .cs-white {
-    background-color: #ffffff49;
+    background-color: #ffffff62;
 }
 
 .cs-black {
-    background-color: #0000003f;
+    background-color: #0000002e;
+}
+
+.chess-piece {
+    position: relative;
+    font-size: 2em;
+    text-align: center;
+    line-height: unset;
+    cursor: grab;
+    width: 100%;
+    height:100%;
+}
+
+.cp-white {
+    color: #FFF;
+}
+
+.cp-black {
+    color: #000;
 }
 
 .radius-tl {
