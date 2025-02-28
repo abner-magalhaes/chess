@@ -1,0 +1,52 @@
+html, body {
+	overflow: hidden;
+	height: 100%;
+}
+
+body {
+	background: linear-gradient(-45deg, #23a6d5, #23d5ab);
+	background-size: 100% 100%;
+}
+
+.chess-board {
+    display: flex;
+    flex-wrap: wrap;
+    border-color: #FFF;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    width: 400px;
+    height: 400px;
+}
+
+.chess-square {
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 1px;
+    width: 12.5%;
+    height: 12.5%;
+}
+
+.cs-white {
+    background-color: #ffffff49;
+}
+
+.cs-black {
+    background-color: #0000003f;
+}
+
+.radius-tl {
+    border-top-left-radius: 5px;
+}
+
+.radius-tr {
+    border-top-right-radius: 5px;
+}
+
+.radius-bl {
+    border-bottom-left-radius: 5px;
+}
+
+.radius-br {
+    border-bottom-right-radius: 5px;
+}
