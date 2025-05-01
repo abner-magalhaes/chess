@@ -9,89 +9,107 @@
         <title>Chess Simple Game</title>
     </head>
     <body>
-        <div class="d-flex flex-column justify-content-center w-100 h-100">
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                
-                <div class="chess-board">
-                    
-                    <div class="chess-square cs-white radius-tl"><i class="chess-piece cp-black fa-solid fa-chess-rook"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-knight"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-bishop"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-queen"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-king"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-bishop"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-knight"></i></div>
-                    <div class="chess-square cs-black radius-tr"><i class="chess-piece cp-black fa-solid fa-chess-rook"></i></div>
+        <div class="container vh-100 d-flex justify-content-center align-items-center">    
 
-                    <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
-                    
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    <div class="chess-square cs-black"></div>
-                    <div class="chess-square cs-white"></div>
-                    
-                    <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
-
-                    <div class="chess-square cs-black radius-bl"><i class="chess-piece cp-white fa-solid fa-chess-rook"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-knight"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-bishop"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-queen"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-king"></i></div>
-                    <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-bishop"></i></div>
-                    <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-knight"></i></div>
-                    <div class="chess-square cs-white radius-br"><i class="chess-piece cp-white fa-solid fa-chess-rook"></i></div>
-                    
+            <div class="row">
+                <div class="row justify-content-center mb-3">
+                    <p id="peer-id" class="text-center text-white" style="font-size: 13px;">
+                        Your ID:
+                    </p>
+                    <div class="input-group input-group-sm" style="width: 325px;">
+                        <input type="text" class="form-control" placeholder="Your opponent ID">
+                        <button class="btn btn-primary" type="button" id="connect-button">Connect</button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div id="chessboard" class="chess-board">
+                        
+                        <div class="chess-square cs-white radius-tl"><i class="chess-piece cp-black fa-solid fa-chess-rook"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-knight"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-bishop"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-queen"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-king"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-bishop"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-knight"></i></div>
+                        <div class="chess-square cs-black radius-tr"><i class="chess-piece cp-black fa-solid fa-chess-rook"></i></div>
+        
+                        <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-black fa-solid fa-chess-pawn"></i></div>
+                        
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+        
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+        
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        <div class="chess-square cs-black"></div>
+                        <div class="chess-square cs-white"></div>
+                        
+                        <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-pawn"></i></div>
+        
+                        <div class="chess-square cs-black radius-bl"><i class="chess-piece cp-white fa-solid fa-chess-rook"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-knight"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-bishop"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-queen"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-king"></i></div>
+                        <div class="chess-square cs-white"><i class="chess-piece cp-white fa-solid fa-chess-bishop"></i></div>
+                        <div class="chess-square cs-black"><i class="chess-piece cp-white fa-solid fa-chess-knight"></i></div>
+                        <div class="chess-square cs-white radius-br"><i class="chess-piece cp-white fa-solid fa-chess-rook"></i></div>
+                        
+                    </div>
                 </div>
                 
             </div>
         </div>
 
-        <script src="js/chess.js?i=3"></script>
+        <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js" defer></script>
+        <script src="js/chess.js?i=3" defer></script>
+
+        <script>
+            window.addEventListener("load", function(){
+                Chess.initialize();
+            });
+        </script>
 
     </body>
 </html>
