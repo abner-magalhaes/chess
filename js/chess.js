@@ -23,7 +23,7 @@ document.addEventListener('mouseup', () => {
 });*/
 
 const SquareLetters = ["a","b","c","d","e","f","g","h"];
-const SquareNumbers = [1,2,3,4,5,6,7,8];
+const SquareNumbers = [8,7,6,5,4,3,2,1];
 
 /**
  * Tipos das peças
@@ -60,9 +60,14 @@ const MoveType = {
  */
 class Square {
 
-    constructor(letter, number) {
-        this.letter = letter;
-        this.number = number;
+    #letter;
+    #number;
+    #dom;
+
+    constructor(letter, number, dom) {
+        this.#letter = letter;
+        this.#number = number;
+        this.#dom = dom;
     }
 
     /**
@@ -70,14 +75,6 @@ class Square {
      */
     hasPiece() {
         return this.piece != null;
-    }
-
-    /**
-     * Limpa qualquer peça dessa casa
-     */
-    clear() {
-        if(this.piece) this.piece.square = null;
-        this.piece = null;
     }
 
 }
@@ -95,12 +92,11 @@ class Piece {
     /**
      * @param {PieceType} type 
      * @param {Square} square 
-     * @param {SideType} side
+     * @param {Player} side
      */
-    constructor(type, square, side) {
+    constructor(type, player) {
         this.type   = type;
-        this.square = square;
-        this.side   = side;
+        this.player = player;
     }
 
     /**
@@ -114,7 +110,9 @@ class Piece {
      * Torna a peça capturada
      */
     captured() {
-        this.#captured = true;
+        this.#captured      = true;
+        this.square.piece   = null;
+        this.square         = null;
     }
     
     move(square) {
@@ -126,13 +124,47 @@ class Piece {
 
 class Player {
 
-    #id         = false;
-    #connected  = false;
+    #id;
+    #side;
     #playing    = false;
     #pieces     = [];
 
-    constructor() {
+    #findByType(piece) {
+        console.log(piece.type, this);
+        if(piece.type == this) {
+            return true;
+        }
+    }
+
+    constructor(id, side) {
         
+        this.#id = id;
+        this.#side = side;
+
+        for(let i = 0; i < 8; i++) {
+            this.#pieces.push(new Piece(PieceType.PAWN, this));
+        }
+
+        this.#pieces.push(new Piece(PieceType.ROOK, this));
+        this.#pieces.push(new Piece(PieceType.ROOK, this));
+
+        this.#pieces.push(new Piece(PieceType.KINGHT, this));
+        this.#pieces.push(new Piece(PieceType.KINGHT, this));
+
+        this.#pieces.push(new Piece(PieceType.BISHOP, this));
+        this.#pieces.push(new Piece(PieceType.BISHOP, this));
+
+        this.#pieces.push(new Piece(PieceType.QUEEN, this));
+        this.#pieces.push(new Piece(PieceType.KING, this));
+
+    }
+
+    getPieces() {
+        return this.#pieces;
+    }
+
+    getSide() {
+        return this.#side;
     }
 
 }
@@ -140,6 +172,7 @@ class Player {
 class Chess {
 
     static #peer;
+    static #connection;
     static #player      = null;
     static #opponent    = null;
     static #turn        = null;
@@ -147,7 +180,64 @@ class Chess {
 
     constructor() {}
 
+    static #getSquare(letter, number) {
+        return this.#squares.find((element) => { return element.letter == this.l && element.number == this.n; }, { l : letter, n : number });
+    }
+
+    static #updateBoard() {
+
+        let playerPieces    = Chess.#player.getPieces();
+        let opponentPieces  = Chess.#opponent.getPieces();
+
+        
+
+    }
+
+    static #startGame() {
+
+        console.log("Chess Start Game!");
+        
+
+        let playerPieces = Chess.#player.getPieces();
+
+
+        console.log(Chess.#getSquare("a", 3));
+
+    }
+
     static #peerReceiveData(data) {
+
+        if(data["connected"]) {
+            
+            Chess.#startGame();
+
+        }
+        else {
+            console.log("PeerJS Received Unhandled Data: ");
+            console.log(data);
+        }
+    }
+
+    static #peerConnected() {
+        console.log("PeerJS Connected");
+        Chess.#connection.send({ connected : true });
+    }
+
+    static #peerConnection(connection) {
+        
+        Chess.#connection = connection;
+        let opponentID = connection.peer;
+        
+        console.log("PeerJS Received Connection From: " + opponentID);
+
+        Chess.#opponent = new Player(opponentID, SideType.BLACK);
+
+        console.log("Chess Opponent initialized");
+
+        Chess.#player = new Player(Chess.#peer.id, SideType.WHITE);
+
+        Chess.#connection.on("data", Chess.#peerReceiveData);
+        Chess.#connection.on("open", Chess.#peerConnected);
 
     }
 
@@ -164,22 +254,47 @@ class Chess {
     }
 
     static #peerOpen() {
-        Chess.#peer.on("data", Chess.#peerReceiveData);
+        document.getElementById("button-connect").removeAttribute("disabled");
         console.log("PeerJS Opened. Current ID: " + Chess.#peer.id)
         document.getElementById("peer-id").innerText = "Your ID: " + Chess.#peer.id;
     }
 
+    static #connect() {
+        let opponentID = document.getElementById("text-opponent-id").value;
+
+        console.log("PeerJS Connecting To: " + opponentID);
+
+        Chess.#connection = Chess.#peer.connect(opponentID);
+        Chess.#connection.on("data", Chess.#peerReceiveData);
+        Chess.#connection.on("open", Chess.#peerConnected);
+        
+        Chess.#player = new Player(Chess.#peer.id, SideType.BLACK);
+        Chess.#opponent = new Player(Chess.#connection.peer, SideType.WHITE);
+    }
+
     static initialize() {
+
+        document.getElementById("button-connect").setAttribute("disabled", "disabled");
+        document.getElementById("button-connect").addEventListener("click", Chess.#connect);
+
         Chess.#peer = new Peer();
         Chess.#peer.on("open", Chess.#peerOpen);
         Chess.#peer.on("close", Chess.#peerClose);
-        Chess.#peer.on("disconnected", Chess.#peerDisconnected);
         Chess.#peer.on("error", Chess.#peerError);
+        Chess.#peer.on("disconnected", Chess.#peerDisconnected);
+        Chess.#peer.on("connection", Chess.#peerConnection);
+        
         console.log("PeerJS Initialized");
-    }
 
-    connect(id) {
-        Chess.#peer
+        let squaresHTML = document.getElementsByClassName("chess-square");
+        let s = 0;
+        for(let l = 0; l < 8; l++) {
+            for(let c = 0; c < 8; c++) {
+                Chess.#squares.push(new Square(SquareLetters[c], SquareNumbers[l]), squaresHTML[s]);
+                s++;
+            }
+        }
+
     }
 
 }
