@@ -196,12 +196,43 @@ class Chess {
     static #startGame() {
 
         console.log("Chess Start Game!");
-        
 
         let playerPieces = Chess.#player.getPieces();
 
+        /**
+         * Organizando as casas do tabuleiro de acordo com a cor do jogador
+         */
+        let squaresHTML = document.getElementsByClassName("chess-square");
+        let s = 0;
+        let csquare;
 
-        console.log(Chess.#getSquare("a", 3));
+        if(Chess.#player.side == SideType.WHITE) {
+            
+            for(let l = 0; l < 8; l++) {
+                for(let c = 0; c < 8; c++) {
+                    
+                    csquare = new Square(SquareLetters[c], SquareNumbers[l], squaresHTML[s]);
+                    Chess.#squares.push(csquare);
+                    s++;
+
+                    for(let p in playerPieces) {
+                        
+                    }
+
+                }
+            }
+
+        }
+        else {
+
+            for(let l = 7; l >= 0; l--) {
+                for(let c = 0; c < 8; c++) {
+                    Chess.#squares.push(new Square(SquareLetters[c], SquareNumbers[l]), squaresHTML[s]);
+                    s++;
+                }
+            }
+
+        }
 
     }
 
@@ -285,15 +316,6 @@ class Chess {
         Chess.#peer.on("connection", Chess.#peerConnection);
         
         console.log("PeerJS Initialized");
-
-        let squaresHTML = document.getElementsByClassName("chess-square");
-        let s = 0;
-        for(let l = 0; l < 8; l++) {
-            for(let c = 0; c < 8; c++) {
-                Chess.#squares.push(new Square(SquareLetters[c], SquareNumbers[l]), squaresHTML[s]);
-                s++;
-            }
-        }
 
     }
 
